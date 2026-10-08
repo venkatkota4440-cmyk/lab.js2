@@ -16,7 +16,7 @@ class SharedBuffer {
 
             notify();
         } catch (InterruptedException e) {
-            System.out.println(e);
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -32,7 +32,7 @@ class SharedBuffer {
 
             notify();
         } catch (InterruptedException e) {
-            System.out.println(e);
+            Thread.currentThread().interrupt();
         }
     }
 }
@@ -75,5 +75,14 @@ public class ProducerConsumer {
 
         p.start();
         c.start();
+
+        try {
+            p.join();
+            c.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        System.out.println("Producer and Consumer completed.");
     }
 }
