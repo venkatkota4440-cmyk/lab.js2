@@ -2,7 +2,6 @@ class SharedBuffer {
     private int item;
     private boolean available = false;
 
-    // Producer puts an item into the buffer
     synchronized void produce(int item) {
         try {
             while (available) {
@@ -20,7 +19,6 @@ class SharedBuffer {
         }
     }
 
-    // Consumer takes an item from the buffer
     synchronized void consume() {
         try {
             while (!available) {
@@ -65,7 +63,7 @@ class Consumer extends Thread {
     }
 }
 
-public class ProducerConsumer {
+public class Main {
     public static void main(String[] args) {
 
         SharedBuffer buffer = new SharedBuffer();
